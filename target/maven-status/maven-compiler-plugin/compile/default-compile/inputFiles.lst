@@ -1,0 +1,10 @@
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/pojos/Subscription.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/services/ContentService.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/interfaces/ISubscriptionService.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/SubscriptionsApplication.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/exceptions/RecordNotFoundException.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/exceptions/ResponseExceptionHandler.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/services/SubscriptionService.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/controllers/SubscriptionController.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/interfaces/IContentService.java
+/Users/dkapoor/personal/springsample/subscriptions/src/main/java/com/example/subscriptions/exceptions/ErrorResponse.java

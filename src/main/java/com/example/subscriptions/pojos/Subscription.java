@@ -34,7 +34,24 @@ public class Subscription {
     @NotNull
     private boolean consent;
 
-    public Subscription() {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isConsent() {
+        return consent;
     }
 
     public String getVerificationURL() {

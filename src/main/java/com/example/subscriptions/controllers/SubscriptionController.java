@@ -2,6 +2,8 @@ package com.example.subscriptions.controllers;
 
 
 import com.example.subscriptions.exceptions.RecordNotFoundException;
+import com.example.subscriptions.interfaces.IContentService;
+import com.example.subscriptions.interfaces.INotificationService;
 import com.example.subscriptions.interfaces.ISubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +20,22 @@ public class SubscriptionController {
     @Autowired
     ISubscriptionService subscriptionService;
 
+    @Autowired
+    IContentService newsletterService;
+
+    @Autowired
+    INotificationService notificationService;
+
     @RequestMapping(value = {"/subscription"}, method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createSubscription(@Valid @RequestBody Subscription subscription) {
-        subscription.setSubscriptionId(subscriptionService.newSubscription(subscription));
+        UUID subscriptionID = subscriptionService.newSubscription(subscription);
+        subscription.setSubscriptionId(subscriptionID);
+        String[] verifyEmailPlaceholders = {subscription.getFirstName(), subscription.getVerificationURL()};
+        String newsletterContent = newsletterService.getNewsLetterContent(IContentService.newletterType.VERIFY_EMAIL, verifyEmailPlaceholders);
 
-        return ResponseEntity.ok(String.format("{subscriptionId: %s}", subscription.getSubscriptionId()));
+        UUID notificationId = notificationService.pushNotification(subscriptionID, newsletterContent);
+        return ResponseEntity.ok(String.format("{subscriptionId: %s, notificationId: %s}", subscription.getSubscriptionId(), notificationId));
     }
 
     @RequestMapping(value = {"/subscription"}, method = RequestMethod.GET)

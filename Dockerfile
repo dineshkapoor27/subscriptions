@@ -1,19 +1,17 @@
-FROM openjdk:8
+# For Java 8, try this
+FROM openjdk:8-jdk-alpine
 
-LABEL MAINTAINER "Dinesh Kapoor <dineshkapoor27@gmail.com>"
+# For Java 11, try this
+#FROM adoptopenjdk/openjdk11:alpine-jre
 
-VOLUME /tmp
-EXPOSE 8080
+# Refer to Maven build -> finalName
+ARG JAR_FILE=target/subscriptions-0.0.1-SNAPSHOT.jar
 
-RUN set -ex \
-  && apt-get update -y \
-  && apt-get upgrade -y \
-  && apt-get install git \
-  && mkdir /subscription \
-  && git clone "https://github.com/dineshkapoor27/subscriptions.git" /subscription \
-  && cd /subscription \
-  && ./mvnw package spring-boot:repackage \
-  && cp target/subscriptions-0.0.1-SNAPSHOT.jar subscriptions.jar \
-  && ls -al
+# cd /opt/app
+WORKDIR /opt/app
 
-CMD [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "subscription/subscriptions.jar" ]
+# cp target/subscriptions-0.0.1-SNAPSHOT.jar /opt/app/app.jar
+COPY ${JAR_FILE} app.jar
+
+# java -jar /opt/app/app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
